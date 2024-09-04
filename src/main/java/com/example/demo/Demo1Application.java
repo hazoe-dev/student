@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.entity.Address;
 import com.example.demo.entity.Student;
 import com.example.demo.repo.StudentRepository;
 
@@ -32,11 +33,12 @@ public class Demo1Application implements CommandLineRunner {
         Logger logger = LoggerFactory.getLogger(this.getClass());
         logger.info("User id 10001 -> {}", repository.findById(100l));
 
+        Address address;
         logger.info("Inserting -> {}",
-                repository.save(new Student("Tara", "Berlin", "West", "1")));
+        repository.save(new Student("John Doe", new Address("CityName1", "DistrictName1", "StreetName1"))));
 
         logger.info("Update 2 -> {}",
-                repository.save(new Student(200l, "Zoe", "Berlin", "West", "1")));
+                repository.save(new Student(200l, "Zoe", new Address("CityName1", "DistrictName1", "StreetName1"))));
 
         repository.deleteById(300l);
 

@@ -4,35 +4,38 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+import jakarta.persistence.Embedded;
+
 @Entity
 public class Student {
-    public Student() {
-    }
-
-    public Student(Long id, String name, String city, String district, String street) {
-        this.id = id;
-        this.name = name;
-        this.city = city;
-        this.district = district;
-        this.street = street;
-    }
-
-    public Student(String name, String city, String district, String street) {
-        this.name = name;
-        this.city = city;
-        this.district = district;
-        this.street = street;
-    }
-
     @Id
     @GeneratedValue
     private Long id;
-
     private String name;
 
-    private String city;
-    private String district;
-    private String street;
+    @Embedded
+    private Address address;
+
+    public Student() {}
+
+    public Student(Long id, String name, Address address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
+
+    public Student(String name, Address address) {
+        this.name = name;
+        this.address = address;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -42,46 +45,20 @@ public class Student {
         this.name = name;
     }
 
-    public String getCity() {
-        return city;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
     public String toString() {
-        return "\nStudent{" +
+        return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", city='" + city + '\'' +
-                ", district='" + district + '\'' +
-                ", street='" + street + '\'' +
+                ", address=" + address +
                 '}';
     }
 }
