@@ -31,7 +31,7 @@ public class Demo1Application implements CommandLineRunner {
     @Override
     public void run(String... args) {
         Logger logger = LoggerFactory.getLogger(this.getClass());
-        logger.info("User id 10001 -> {}", repository.findById(100l));
+        logger.info("Student id 100 -> {}", repository.findById(100l));
 
         Address address;
         logger.info("Inserting -> {}",
@@ -43,5 +43,9 @@ public class Demo1Application implements CommandLineRunner {
         repository.deleteById(300l);
 
         logger.info("All users -> {}", repository.findAll());
+
+        logger.info("Address of student id 100 -> {}", repository.findAddressByStudentId(100l));
+
+        logger.info("Get all address -> {}", repository.findAllAddresses());
     }
 }

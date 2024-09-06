@@ -42,7 +42,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" +
+        return "\nAddress{" +
                 "city='" + city + '\'' +
                 ", district='" + district + '\'' +
                 ", street='" + street + '\'' +
