@@ -10,8 +10,6 @@ public class AreaScholarship extends Scholarship {
     private String areaCode;
     private Double discountAmount;
 
-    // Constructors, Getters, and Setters
-
     public AreaScholarship() {}
 
     public AreaScholarship(String name, String areaCode, Double discountAmount) {

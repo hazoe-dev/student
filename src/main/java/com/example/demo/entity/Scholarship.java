@@ -13,8 +13,6 @@ public abstract class Scholarship {
 
     private String name;
 
-    // Constructors, Getters, and Setters
-
     public Scholarship() {}
 
     public Scholarship(String name) {

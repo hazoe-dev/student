@@ -10,8 +10,6 @@ public class PolicyScholarship extends Scholarship {
 
     private Double percentageAmount;
 
-    // Constructors, Getters, and Setters
-
     public PolicyScholarship() {}
 
     public PolicyScholarship(String name, Double percentageAmount) {
