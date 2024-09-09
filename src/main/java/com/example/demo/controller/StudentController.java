@@ -55,5 +55,15 @@ public class StudentController {
         Double totalTuition = tuitionService.calculateTotalTuition(studentId);
         return ResponseEntity.ok(totalTuition);
     }
+
+    @PutMapping("/{studentId}/address/area-code")
+    public ResponseEntity<Student> updateAreaCode(
+            @PathVariable Long studentId,
+            @RequestParam String areaCode) {
+
+        // Call the service to update the student's area code
+        Student updatedStudent = studentService.updateStudentAreaCode(studentId, areaCode);
+        return ResponseEntity.ok(updatedStudent);
+    }
 }
 

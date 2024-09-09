@@ -37,6 +37,10 @@ public class Demo1Application implements CommandLineRunner {
         logger.info("Inserting -> {}",
         repository.save(new Student("John Doe", new Address("CityName1", "DistrictName1", "StreetName1"))));
 
+        Address address1 = new Address("CityName1", "DistrictName1", "StreetName1", "AREA123");
+        logger.info("Inserting -> {}",
+                repository.save(new Student("John Zoe", address1)));
+
         logger.info("Update 2 -> {}",
                 repository.save(new Student(200l, "Zoe", new Address("CityName1", "DistrictName1", "StreetName1"))));
 

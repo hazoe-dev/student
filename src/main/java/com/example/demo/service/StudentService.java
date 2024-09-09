@@ -6,6 +6,7 @@ import com.example.demo.entity.Scholarship;
 import com.example.demo.entity.Student;
 import com.example.demo.repo.StudentRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +65,28 @@ public class StudentService {
     public List<Scholarship> getStudentScholarships(Long studentId) {
         Student student = studentRepository.findById(studentId).orElseThrow(() -> new RuntimeException("Student not found"));
         return student.getScholarships(); // This will return a list of scholarships based on the logic
+    }
+
+    @Transactional
+    public Student updateStudentAreaCode(Long studentId, String newAreaCode) {
+        // Fetch the student by their ID
+        Optional<Student> optionalStudent = studentRepository.findById(studentId);
+
+        if (optionalStudent.isPresent()) {
+            Student student = optionalStudent.get();
+
+            // Update the area code in the address
+            Address address = student.getAddress();
+            if (address != null) {
+                address.setAreaCode(newAreaCode);
+                student.setAddress(address); // Update the student's address
+                return studentRepository.save(student); // Save the updated student
+            } else {
+                throw new IllegalStateException("Student does not have an address");
+            }
+        } else {
+            throw new IllegalArgumentException("Student not found with ID: " + studentId);
+        }
     }
 }
 
