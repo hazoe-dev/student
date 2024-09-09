@@ -7,6 +7,7 @@ public class Address {
     private String city;
     private String district;
     private String street;
+    private String areaCode;
 
     public Address() {}
 
@@ -14,6 +15,13 @@ public class Address {
         this.city = city;
         this.district = district;
         this.street = street;
+    }
+
+    public Address(String city, String district, String street, String areaCode) {
+        this.city = city;
+        this.district = district;
+        this.street = street;
+        this.areaCode = areaCode;
     }
 
     public String getCity() {
@@ -39,6 +47,14 @@ public class Address {
     public void setStreet(String street) {
         this.street = street;
     }
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
+
 
     @Override
     public String toString() {
@@ -46,6 +62,7 @@ public class Address {
                 "city='" + city + '\'' +
                 ", district='" + district + '\'' +
                 ", street='" + street + '\'' +
+                ", areaCode='" + areaCode + '\'' +
                 '}';
     }
 }
