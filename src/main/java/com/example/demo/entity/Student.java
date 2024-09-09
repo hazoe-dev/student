@@ -1,11 +1,8 @@
 package com.example.demo.entity;
 
 import com.example.demo.repo.ScholarshipRepository;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-import jakarta.persistence.Embedded;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -106,5 +103,15 @@ public class Student {
         return scholarships;
     }
 
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private List<Tuition> tuitions;
+
+    public List<Tuition> getTuitions() {
+        return tuitions;
+    }
+
+    public void setTuitions(List<Tuition> tuitions) {
+        this.tuitions = tuitions;
+    }
 
 }
