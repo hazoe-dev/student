@@ -44,4 +44,12 @@ public class Tuition {
     public void setStudent(Student student) {
         this.student = student;
     }
+
+    @Override
+    public String toString() {
+        return "Tuition{" +
+                "id=" + id +
+                ", amount=" + amount +
+                '}';
+    }
 }

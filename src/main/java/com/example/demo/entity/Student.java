@@ -1,11 +1,6 @@
 package com.example.demo.entity;
 
-import com.example.demo.repo.ScholarshipRepository;
 import jakarta.persistence.*;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,11 +10,6 @@ public class Student {
     private Long id;
     private String name;
     private Boolean isPolicyFamily; // New field
-
-    @Autowired
-    private transient ScholarshipRepository scholarshipRepository; // Autowired for DB interaction
-
-
 
     @Embedded
     private Address address;
@@ -82,25 +72,6 @@ public class Student {
                 ", name='" + name + '\'' +
                 ", address=" + address +
                 '}';
-    }
-
-
-    public List<Scholarship> getScholarships() {
-        List<Scholarship> scholarships = new ArrayList<>();
-
-        // Add PolicyScholarship if the student is from a policy family
-        if (Boolean.TRUE.equals(isPolicyFamily)) {
-            List<PolicyScholarship> policyScholarships = scholarshipRepository.findAllBy();
-            scholarships.addAll(policyScholarships);
-        }
-
-        // Add AreaScholarship based on the area code in the student's address
-        if (this.address != null && this.address.getAreaCode() != null) {
-            List<AreaScholarship> areaScholarships = scholarshipRepository.findByAreaCode(this.address.getAreaCode());
-            scholarships.addAll(areaScholarships);
-        }
-
-        return scholarships;
     }
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)

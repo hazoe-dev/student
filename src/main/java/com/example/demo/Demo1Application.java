@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.example.demo.entity.Address;
 import com.example.demo.entity.Student;
+import com.example.demo.entity.sort.SearchServiceImpl;
 import com.example.demo.repo.StudentRepository;
 
 import org.slf4j.Logger;
@@ -33,16 +34,15 @@ public class Demo1Application implements CommandLineRunner {
         Logger logger = LoggerFactory.getLogger(this.getClass());
         logger.info("Student id 100 -> {}", repository.findById(100l));
 
-        Address address;
         logger.info("Inserting -> {}",
-        repository.save(new Student("John Doe", new Address("CityName1", "DistrictName1", "StreetName1"))));
+        repository.save(new Student("John Doe", new Address("CityName1", "DistrictName1", "StreetName1", "AREA123"))));
 
         Address address1 = new Address("CityName1", "DistrictName1", "StreetName1", "AREA123");
         logger.info("Inserting -> {}",
                 repository.save(new Student("John Zoe", address1)));
 
         logger.info("Update 2 -> {}",
-                repository.save(new Student(200l, "Zoe", new Address("CityName1", "DistrictName1", "StreetName1"))));
+                repository.save(new Student(200l, "Zoe", new Address("CityName1", "DistrictName1", "StreetName1", "AREA123"))));
 
         repository.deleteById(300l);
 

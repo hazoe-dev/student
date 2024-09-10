@@ -36,4 +36,12 @@ public abstract class Scholarship {
     }
 
     public abstract double getTotalDiscount(double tuitionAmount);
+
+    @Override
+    public String toString() {
+        return "Scholarship{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

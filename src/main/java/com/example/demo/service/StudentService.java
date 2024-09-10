@@ -19,6 +19,9 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
+    @Autowired
+    private ScholarshipService scholarshipService;
+
     // Get address of a specific student
     public Address getAddressByStudentId(Long studentId) {
         return studentRepository.findAddressByStudentId(studentId);
@@ -64,7 +67,7 @@ public class StudentService {
     }
     public List<Scholarship> getStudentScholarships(Long studentId) {
         Student student = studentRepository.findById(studentId).orElseThrow(() -> new RuntimeException("Student not found"));
-        return student.getScholarships(); // This will return a list of scholarships based on the logic
+        return scholarshipService.getScholarshipsByStudent(student);
     }
 
     @Transactional

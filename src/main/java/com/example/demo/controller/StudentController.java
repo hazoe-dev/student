@@ -21,9 +21,9 @@ public class StudentController {
     private TuitionService tuitionService;
 
     // Get all students
-    @GetMapping
-    public List<Student> getAllStudents() {
-        return studentService.getAllStudents();
+    @GetMapping("/all")
+    public ResponseEntity<List<Student>> getAllStudents() {
+        return ResponseEntity.ok(studentService.getAllStudents());
     }
 
     // Get a student by ID
