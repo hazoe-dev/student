@@ -33,4 +33,9 @@ public class AreaScholarship extends Scholarship {
     public void setDiscountAmount(Double discountAmount) {
         this.discountAmount = discountAmount;
     }
+
+    @Override
+    public double getTotalDiscount(double tuitionAmount) {
+        return discountAmount; // Fixed amount discount
+    }
 }

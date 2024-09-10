@@ -34,4 +34,6 @@ public abstract class Scholarship {
     public void setName(String name) {
         this.name = name;
     }
+
+    public abstract double getTotalDiscount(double tuitionAmount);
 }

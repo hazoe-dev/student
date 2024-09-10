@@ -24,4 +24,9 @@ public class PolicyScholarship extends Scholarship {
     public void setPercentageAmount(Double percentageAmount) {
         this.percentageAmount = percentageAmount;
     }
+
+    @Override
+    public double getTotalDiscount(double tuitionAmount) {
+        return (percentageAmount / 100) * tuitionAmount; // Percentage discount
+    }
 }

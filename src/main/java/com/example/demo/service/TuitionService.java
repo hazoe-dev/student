@@ -1,6 +1,7 @@
 package com.example.demo.service;
-import com.example.demo.entity.*;
-import com.example.demo.repo.ScholarshipRepository;
+import com.example.demo.entity.Scholarship;
+import com.example.demo.entity.Student;
+import com.example.demo.entity.Tuition;
 import com.example.demo.repo.TuitionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ public class TuitionService {
     private TuitionRepository tuitionRepository;
 
     @Autowired
-    private ScholarshipRepository scholarshipRepository;
+    private TuitionCalculator calculator;
 
     public Double calculateTotalTuition(Long studentId) {
         // Get the student tuitions
@@ -28,29 +29,8 @@ public class TuitionService {
         Student student = tuitions.get(0).getStudent(); // Assuming there's at least one tuition
         List<Scholarship> scholarships = student.getScholarships();
 
-        // Initialize discount amounts
-        Double totalDiscount = 0.0;
-        Double totalPercentageDiscount = 0.0;
-
-        // Loop through scholarships and calculate total discount
-        for (Scholarship scholarship : scholarships) {
-            if (scholarship instanceof AreaScholarship) {
-                // AreaScholarship has a discount amount
-                AreaScholarship areaScholarship = (AreaScholarship) scholarship;
-                totalDiscount += areaScholarship.getDiscountAmount();
-            } else if (scholarship instanceof PolicyScholarship) {
-                // PolicyScholarship has a percentage discount
-                PolicyScholarship policyScholarship = (PolicyScholarship) scholarship;
-                totalPercentageDiscount += policyScholarship.getPercentageAmount();
-            }
-        }
-
-        // Apply percentage discount first
-        Double percentageDiscount = (totalPercentageDiscount / 100) * totalTuition;
-        Double discountedTuition = totalTuition - percentageDiscount;
-
-        // Apply fixed amount discount
-        discountedTuition -= totalDiscount;
+        // Apply discount
+        Double discountedTuition = calculator.calculateFinalTuition(scholarships,totalTuition);
 
         // Ensure discounted tuition is not negative
         return Math.max(discountedTuition, 0.0);
